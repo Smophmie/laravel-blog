@@ -13,10 +13,13 @@
                             <h2 class="text-xl font-semibold text-black dark:text-white">
                                 {{$post['title']}}
                             </h2>
+                            <div class="flex flex-row justify-start items-start gap-2">
+                                <p class="mt-4 text-sm/relaxed">
+                                    {{$post['content']}}
+                                </p>
 
-                            <p class="mt-4 text-sm/relaxed">
-                                {{$post['content']}}
-                            </p>
+                                <img src='{{$post['image']}}' alt="">
+                            </div>
                         </div>
                     </div>
                 @endforeach
