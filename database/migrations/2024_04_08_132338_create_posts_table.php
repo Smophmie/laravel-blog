@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table ->text('content');
-            $table ->text('image');
+            $table ->text('image')->nullable();
+            $table -> text('author')->nullable();
+            $table ->bigInteger('author_id')->nullable();
             $table->timestamps();
         });
     }

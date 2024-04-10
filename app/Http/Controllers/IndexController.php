@@ -16,4 +16,9 @@ class IndexController extends Controller
             'posts'=>$posts,
         ]);
     }
+
+    public function admin(): View
+    {   
+        return view('dashboard');
+    }
 }
