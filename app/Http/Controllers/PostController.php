@@ -16,24 +16,27 @@ class PostController extends Controller
   public function postslistbyauthor(): View
   {
     // Get user's id
-    $id = Auth::id();
+    $userid = Auth::id();
     
     // Get posts where author_id matches with user's id
-    $posts = Post::where('author_id', $id)->get();
+    $posts = Post::where('author_id', $userid)->get();
     return view('my-posts', [
         'posts'=>$posts,
     ]);
   }
 
+  // Display a form to update it.
+  // $id corresponds to the post's id that we want to update
 
-  //   Show the form to modify a post.
-  public function modifpostform()
+  public function modifpostform($id)
   {
-    $id = Auth::id();
-    $name = Auth::user()->name;
-    return view('modif-post', [
-      'author'=>$name,
-      'author_id'=>$id,
+    $post = Post::find($id);
+    $authorid = Auth::id();
+    $authorname = Auth::user()->name;
+    return view('modif-post', compact('post'), [
+      'post'=>$post,
+      'author'=>$authorname,
+      'author_id'=>$authorid,
     ]);
   }
 
@@ -90,7 +93,7 @@ class PostController extends Controller
       ]);
       $post = Post::find($id);
       $post->update($request->all());
-      return redirect()->route('posts.index')
+      return redirect()->route('postslist')
         ->with('success', 'Post updated successfully.');
     }
 

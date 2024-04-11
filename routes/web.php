@@ -22,8 +22,8 @@ Route::group(['prefix' => '/dashboard'], function () {
     Route::get('/create-post', [PostController::class, 'createpostform'])->name('createpost');
     Route::post('/create-post', [PostController::class, 'store'])->name('storepost');
 
-    Route::get('/modif-post/{id}', [PostController::class, 'modifpostform'])->name('modifpost');
-    Route::put('/modif-post', [PostController::class, 'update'])->name('updatepost');
+    Route::get('/{id}/modif-post', [PostController::class, 'modifpostform'])->name('modifpost');
+    Route::put('/{id}', [PostController::class, 'update'])->name('updatepost');
 
     Route::delete('/suppr-post/{id}', [PostController::class, 'destroy'])->name('supprpost');
 })->middleware('auth');
