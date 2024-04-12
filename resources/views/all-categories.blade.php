@@ -24,13 +24,13 @@
     
                                     <img src='{{$post['image']}}' alt="">
                                 </div> --}}
-                                {{-- <a href="{{ route('modifcategory', $category->id) }}">Modifier</a>
+                                {{-- <a href="{{ route('modifcategory', $category->id) }}">Modifier</a>--}}
                                 
                                 <form action="{{ route('supprcategory', $category->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                                </form> --}}
+                                </form>
                             </div>
                         </div>
                     @endforeach

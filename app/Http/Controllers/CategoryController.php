@@ -38,4 +38,12 @@ class CategoryController extends Controller
       return redirect()->route('postslist')
       ->with('success', 'Post created successfully.');
     }
+
+    public function destroy($id)
+    {
+      $category = Category::find($id);
+      $category->delete();
+      return redirect()->route('categorieslist')
+        ->with('success', 'Post deleted successfully');
+    }
 }

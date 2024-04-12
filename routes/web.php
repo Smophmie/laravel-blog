@@ -30,6 +30,9 @@ Route::group(['prefix' => '/my-posts'], function () {
     Route::post('/create-category', [CategoryController::class, 'store'])->name('storecategory');
 
     Route::get('/all-categories', [CategoryController::class, 'categorieslist'])->name('categorieslist');
+
+    Route::delete('/suppr-category/{id}', [CategoryController::class, 'destroy'])->name('supprcategory');
+
 })->middleware('auth');
 
 
