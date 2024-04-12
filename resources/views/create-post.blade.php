@@ -47,11 +47,6 @@
                     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="photo-url" type="text" name='image'>
                 </div>
             </div>
-
-            
-            <input id="author" type="hidden" name='author' value='{{$author}}'>
-              
-            <input id="author_id" type="hidden" name='author_id' value='{{$author_id}}'>
         
             <input class="shadow focus:shadow-outline focus:outline-none font-bold py-2 px-4 uppercase tracking-wide text-gray-700 text-xs mb-2 rounded" type="submit">
             

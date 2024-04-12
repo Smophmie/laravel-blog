@@ -32,10 +32,8 @@ class PostController extends Controller
   {
     $post = Post::find($id);
     $authorid = Auth::id();
-    $authorname = Auth::user()->name;
     return view('modif-post', compact('post'), [
       'post'=>$post,
-      'author'=>$authorname,
       'author_id'=>$authorid,
     ]);
   }
@@ -45,11 +43,7 @@ class PostController extends Controller
   public function createpostform()
   {
     $id = Auth::id();
-    $name = Auth::user()->name;
-    return view('create-post', [
-      'author'=>$name,
-      'author_id'=>$id,
-    ]);
+    return view('create-post');
   }
 
 
@@ -58,17 +52,16 @@ class PostController extends Controller
    */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'content' => 'required',
-            'image' => 'required',
-            'author' => 'required',
-            'author_id' => 'required',
-        ]);
-        Post::create($request->all());
-        return redirect()->route('postslist')
-        ->with('success', 'Post created successfully.');
+      $request->request->add(['author_id'=> Auth::id()]);
+      $request->validate([
+          'title' => 'required|max:255',
+          'description' => 'required',
+          'content' => 'required',
+          'author_id' => 'required',
+      ]);
+      Post::create($request->all());
+      return redirect()->route('postslist')
+      ->with('success', 'Post created successfully.');
     }
 
     /**

@@ -19,6 +19,6 @@ class IndexController extends Controller
 
     public function admin(): View
     {   
-        return view('dashboard');
+        return view('postslist');
     }
 }
