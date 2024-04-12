@@ -19,10 +19,21 @@ class CategoryController extends Controller
     public function modifcategoryform($id)
   {
     $category = Category::find($id);
-    return view('modif-category', compact('post'), [
+    return view('modif-category', [
       'category'=>$category,
     ]);
   }
+
+  public function update(Request $request, $id)
+    {
+      $request->validate([
+          'name' => 'required|max:255',
+      ]);
+      $category = Category::find($id);
+      $category->update($request->all());
+      return redirect()->route('categorieslist')
+        ->with('success', 'Post updated successfully.');
+    }
 
   public function createcategoryform()
   {
@@ -35,7 +46,7 @@ class CategoryController extends Controller
           'name' => 'required|max:255',
       ]);
       Category::create($request->all());
-      return redirect()->route('postslist')
+      return redirect()->route('categorieslist')
       ->with('success', 'Post created successfully.');
     }
 

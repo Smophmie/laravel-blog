@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <section class="max-w-7xl mx-auto pt-5 sm:pt-5 sm:px-6 lg:px-8">
 
         <form class="w-full max-w-lg px-8 pt-6 pb-8 mb-4" action="{{ route('storepost') }}" method="post">
 

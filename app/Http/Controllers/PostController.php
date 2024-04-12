@@ -97,7 +97,7 @@ class PostController extends Controller
     {
       $post = Post::find($id);
       $post->delete();
-      return redirect()->route('dashboard')
+      return redirect()->route('postslist')
         ->with('success', 'Post deleted successfully');
     }
 }

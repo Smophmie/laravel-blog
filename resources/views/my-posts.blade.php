@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <section class="max-w-7xl mx-auto pt-5 sm:pt-5 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-2">
             
                     @if ($posts)
