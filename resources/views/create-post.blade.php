@@ -47,7 +47,20 @@
                     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="photo-url" type="text" name='image'>
                 </div>
             </div>
-        
+
+            
+            @if ($categories)
+                <fieldset class="flex flex-wrap -mx-3 mb-6">
+                    <legend class=" w-full px-3 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Choisir la ou les catégories liées au post:</legend>
+                    @foreach ($categories as $category)
+                        <div class="px-3">
+                            <input type="checkbox" id="{{$category->name}}" name="category_id[]" value="{{$category->id}}"/>
+                            <label for="{{$category->name}}" class=" w-full px-3">{{$category->name}}</label>
+                        </div>
+                    @endforeach
+                </fieldset>  
+            @endif
+
             <input class="shadow focus:shadow-outline focus:outline-none font-bold py-2 px-4 uppercase tracking-wide text-gray-700 text-xs mb-2 rounded" type="submit">
             
         </form>

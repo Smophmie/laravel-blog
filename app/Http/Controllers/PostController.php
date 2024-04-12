@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -32,9 +33,11 @@ class PostController extends Controller
   {
     $post = Post::find($id);
     $authorid = Auth::id();
+    $categories = Category::all();
     return view('modif-post', compact('post'), [
       'post'=>$post,
       'author_id'=>$authorid,
+      'categories'=> $categories,
     ]);
   }
 
@@ -43,7 +46,10 @@ class PostController extends Controller
   public function createpostform()
   {
     $id = Auth::id();
-    return view('create-post');
+    $categories = Category::all();
+    return view('create-post', [
+      'categories'=> $categories,
+    ]);
   }
 
 
@@ -59,7 +65,8 @@ class PostController extends Controller
           'content' => 'required',
           'author_id' => 'required',
       ]);
-      Post::create($request->all());
+      $post = Post::create($request->all());
+      $post->categories()->attach($request->category_id);
       return redirect()->route('postslist')
       ->with('success', 'Post created successfully.');
     }
@@ -86,6 +93,7 @@ class PostController extends Controller
       ]);
       $post = Post::find($id);
       $post->update($request->all());
+      $post->categories()->sync($request->category_id);
       return redirect()->route('postslist')
         ->with('success', 'Post updated successfully.');
     }
