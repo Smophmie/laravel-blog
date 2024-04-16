@@ -55,7 +55,7 @@
                     @foreach ($categories as $category)
                         <div class="px-3">
                             <input type="checkbox" id="{{$category->name}}" name="category_id[]" value="{{$category->id}}"/>
-                            <label for="{{$category->name}}" class=" w-full px-3">{{$category->name}}</label>
+                            <label for="{{$category->name}}" class=" w-full px-3 text-gray-700">{{$category->name}}</label>
                         </div>
                     @endforeach
                 </fieldset>  
