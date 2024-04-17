@@ -6,6 +6,8 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -41,6 +43,28 @@ Route::group(['prefix' => '/all-categories'], function () {
     Route::put('/{id}', [CategoryController::class, 'update'])->name('updatecategory');
 
     Route::delete('/suppr-category/{id}', [CategoryController::class, 'destroy'])->name('supprcategory');
+    
+})->middleware('auth');
+
+// Route::group(['prefix' => '/all-users'], function () {
+//     // Concerne les utilisateurs
+//     Route::get('/', [UserController::class, 'userslist'])->name('userslist');
+
+//     Route::get('/{id}/modif-user', [UserController::class, 'modifuserform'])->name('modifuser');
+//     Route::put('/{id}', [UserController::class, 'update'])->name('updateuser');
+
+//     Route::delete('/suppr-user/{id}', [UserController::class, 'destroy'])->name('suppruser');
+    
+// })->middleware('auth');
+
+Route::group(['middleware' => AdminMiddleware::class], function () {
+    // Concerne les utilisateurs
+    Route::get('/all-users', [UserController::class, 'userslist'])->name('userslist');
+
+    Route::get('/all-users/{id}/modif-user', [UserController::class, 'modifuserform'])->name('modifuser');
+    Route::put('/all-users/{id}', [UserController::class, 'update'])->name('updateuser');
+
+    Route::delete('/all-users/suppr-user/{id}', [UserController::class, 'destroy'])->name('suppruser');
     
 })->middleware('auth');
 

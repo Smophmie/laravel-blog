@@ -17,12 +17,21 @@
                                 </a>
 
                                 @auth
-                                    <a
-                                        href="{{ url('/my-posts') }}"
+                                    @if(auth()->check() && auth()->user()->role === 'normal')
+                                        <a
+                                            href="{{ url('/my-posts') }}"
+                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        >
+                                            Mes posts
+                                        </a>
+                                    @elseif (auth()->check() && auth()->user()->role === 'admin')
+                                        <a
+                                        href="{{ url('/all-categories') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
-                                        Mes posts
-                                    </a>
+                                        Administration du blog
+                                        </a>
+                                    @endif
 
                                     <form method="POST" action="{{ route('logout') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                         @csrf

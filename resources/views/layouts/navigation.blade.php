@@ -12,18 +12,24 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @if(auth()->check() && auth()->user()->role === 'normal')
                     <x-nav-link :href="route('postslist')" :active="request()->routeIs('postslist')">
                         {{ __('Mes posts') }}
                     </x-nav-link>
                     <x-nav-link :href="route('createpost')" :active="request()->routeIs('createpost')">
                         {{ __('Nouveau post') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('categorieslist')" :active="request()->routeIs('categorieslist')">
-                        {{ __('Toutes les catégories') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('createcategory')" :active="request()->routeIs('createcategory')">
-                        {{ __('Nouvelle Catégorie') }}
-                    </x-nav-link>
+                    @elseif(auth()->check() && auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('categorieslist')" :active="request()->routeIs('categorieslist')">
+                            {{ __('Toutes les catégories') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('createcategory')" :active="request()->routeIs('createcategory')">
+                            {{ __('Nouvelle Catégorie') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('userslist')" :active="request()->routeIs('userslist')">
+                            {{ __('Tous les utilisateurs') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
