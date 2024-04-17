@@ -33,6 +33,7 @@ class UserController extends Controller
       ]);
       $user = User::find($id);
       $user->update($request->all());
+      $user->posts()->sync($request->user_id);
       return redirect()->route('userslist')
         ->with('success', 'User updated successfully.');
     }

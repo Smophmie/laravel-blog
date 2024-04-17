@@ -20,7 +20,7 @@ class PostController extends Controller
     $userid = Auth::id();
     
     // Get posts where author_id matches with user's id
-    $posts = Post::where('author_id', $userid)->get();
+    $posts = Post::where('user_id', $userid)->get();
     return view('my-posts', [
         'posts'=>$posts,
     ]);
@@ -36,7 +36,7 @@ class PostController extends Controller
     $categories = Category::all();
     return view('modif-post', compact('post'), [
       'post'=>$post,
-      'author_id'=>$authorid,
+      'user_id'=>$authorid,
       'categories'=> $categories,
     ]);
   }
@@ -58,12 +58,12 @@ class PostController extends Controller
    */
     public function store(Request $request)
     {
-      $request->request->add(['author_id'=> Auth::id()]);
+      $request->request->add(['user_id'=> Auth::id()]);
       $request->validate([
           'title' => 'required|max:255',
           'description' => 'required',
           'content' => 'required',
-          'author_id' => 'required',
+          'user_id' => 'required',
       ]);
       $post = Post::create($request->all());
       $post->categories()->attach($request->category_id);
@@ -104,6 +104,7 @@ class PostController extends Controller
     public function destroy($id)
     {
       $post = Post::find($id);
+      $post->categories()->detach();
       $post->delete();
       return redirect()->route('postslist')
         ->with('success', 'Post deleted successfully');

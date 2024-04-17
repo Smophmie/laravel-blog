@@ -32,9 +32,15 @@
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="role">
-                        Rôle de l'utilisateur'
+                        Rôle de l'utilisateur:
                     </label>
-                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="role" type="text" name="role" value="{{$user->role}}">
+                    <div class="text-gray-700">
+                        <input type="radio" id="normal_role" name="role" value="normal"/>
+                        <label for="normal_role">Utilisateur classique</label>
+                    
+                        <input type="radio" id="admin_role" name="role" value="admin"/>
+                        <label for="admin_role">Administrateur</label>
+                    </div>
                 </div>
             </div>
         

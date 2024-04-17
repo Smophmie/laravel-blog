@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\NonAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,8 +18,8 @@ Route::get('/legals', [LegalsController::class, 'legals'])->name('legals');
 
 Route::get('/about-us', [AboutUsController::class, 'about_us'])->name('about-us');
 
-Route::group(['prefix' => '/my-posts'], function () {
-    // Concerne les posts
+Route::group(['prefix' => '/my-posts', 'middleware' => ['auth', NonAdminMiddleware::class]], function () {
+    // Concerne les posts accessibles aux non admin
     Route::get('/', [PostController::class, 'postslistbyauthor'])->name('postslist');
 
     Route::get('/create-post', [PostController::class, 'createpostform'])->name('createpost');
@@ -29,11 +30,11 @@ Route::group(['prefix' => '/my-posts'], function () {
 
     Route::delete('/suppr-post/{id}', [PostController::class, 'destroy'])->name('supprpost');
 
+});
 
-})->middleware('auth');
 
-Route::group(['prefix' => '/all-categories'], function () {
-    // Concerne les catégories
+Route::group(['prefix' => '/all-categories', 'middleware' => ['auth', AdminMiddleware::class]], function () {
+    // Concerne les catégories accessibles aux admin
     Route::get('/', [CategoryController::class, 'categorieslist'])->name('categorieslist');
 
     Route::get('/create-category', [CategoryController::class, 'createcategoryform'])->name('createcategory');
@@ -44,29 +45,20 @@ Route::group(['prefix' => '/all-categories'], function () {
 
     Route::delete('/suppr-category/{id}', [CategoryController::class, 'destroy'])->name('supprcategory');
     
-})->middleware('auth');
+});
 
-// Route::group(['prefix' => '/all-users'], function () {
-//     // Concerne les utilisateurs
-//     Route::get('/', [UserController::class, 'userslist'])->name('userslist');
 
-//     Route::get('/{id}/modif-user', [UserController::class, 'modifuserform'])->name('modifuser');
-//     Route::put('/{id}', [UserController::class, 'update'])->name('updateuser');
 
-//     Route::delete('/suppr-user/{id}', [UserController::class, 'destroy'])->name('suppruser');
+Route::group(['prefix' => '/all-users', 'middleware' => ['auth', AdminMiddleware::class]], function () {
+    // Concerne les utilisateurs accessibles aux admin
+    Route::get('/', [UserController::class, 'userslist'])->name('userslist');
+
+    Route::get('/{id}/modif-user', [UserController::class, 'modifuserform'])->name('modifuser');
+    Route::put('/{id}', [UserController::class, 'update'])->name('updateuser');
+
+    Route::delete('/suppr-user/{id}', [UserController::class, 'destroy'])->name('suppruser');
     
-// })->middleware('auth');
-
-Route::group(['middleware' => AdminMiddleware::class], function () {
-    // Concerne les utilisateurs
-    Route::get('/all-users', [UserController::class, 'userslist'])->name('userslist');
-
-    Route::get('/all-users/{id}/modif-user', [UserController::class, 'modifuserform'])->name('modifuser');
-    Route::put('/all-users/{id}', [UserController::class, 'update'])->name('updateuser');
-
-    Route::delete('/all-users/suppr-user/{id}', [UserController::class, 'destroy'])->name('suppruser');
-    
-})->middleware('auth');
+});
 
 
 

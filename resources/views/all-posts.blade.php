@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Mes posts') }}
+            {{ __('Tous les posts') }}
         </h2>
     </x-slot>
 
@@ -11,30 +11,30 @@
                     @if ($posts)
                     @foreach($posts as $post)                        
                         <div
-                            class="m-1 flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                            class="m-15 flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                         >
-                            <div class="m-3 flex flex-col items-start gap-2 pt-3 sm:pt-5">
+                            <div class="m-10 flex flex-col items-start gap-2 pt-3 sm:pt-5">
                                 <h2 class="text-xl font-semibold text-black dark:text-white">
                                     {{$post['title']}}
                                 </h2>
                                 <div class="flex flex-row justify-start items-start gap-2">
                                     <div>
-                                        <p class="mt-4">
+                                        <p class="mt-4 text-sm/relaxed">
                                             {{$post['description']}}
                                         </p>
-                                        <p class="mt-4">
+                                        <p class="mt-4 text-sm/relaxed">
                                             {{$post['content']}}
                                         </p>
                                     </div>
                                     <img src='{{$post['image']}}' alt="">
                                 </div>
                                 <div class="flex gap-2">
-                                    <a href="{{ route('modifpost', $post->id) }}" class="hover:text-black/70">Modifier</a>
+                                    <a href="{{ route('modifpost', $post->id) }}">Modifier</a>
                                     
                                     <form action="{{ route('supprpost', $post->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm hover:text-black/70">Supprimer</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                                     </form>
                                 </div>
                             </div>

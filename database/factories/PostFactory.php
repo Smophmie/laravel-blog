@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'description' => fake()->sentence(10),
             'content' => fake()->sentence(50),
             'image' => fake()->imageUrl(150, 150, 'Post Image', true),
-            'author_id' => 1,
+            'user_id' => 1,
         ];
     }
 }

@@ -16,17 +16,17 @@ class Post extends Model
         'description',
         'content',
         'image',
-        'author_id',
+        'user_id',
     ];
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->BelongsToMany(Category::class);
     }
    
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->BelongsTo(User::class);
     }
 
 }
