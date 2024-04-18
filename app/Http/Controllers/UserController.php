@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Post;
 
 class UserController extends Controller
 {
@@ -42,6 +43,11 @@ class UserController extends Controller
     public function destroy($id)
     {
       $user = User::find($id);
+      $posts = Post::all()->where("user_id", $id);
+      foreach ($posts as $post) {
+        $post->categories()->detach();
+        $post->delete();
+      }
       $user->delete();
       return redirect()->route('userslist')
         ->with('success', 'User deleted successfully');
