@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -58,13 +59,20 @@ class PostController extends Controller
    */
     public function store(Request $request)
     {
+      
       $request->request->add(['user_id'=> Auth::id()]);
       $request->validate([
           'title' => 'required|max:255',
           'description' => 'required',
           'content' => 'required',
           'user_id' => 'required',
+          'imageinput' => 'required',
       ]);
+      
+
+      $imagePath = $request->imageinput->store('blog', 'public');
+      $request['image']=$imagePath;
+
       $post = Post::create($request->all());
       $post->categories()->attach($request->category_id);
       return redirect()->route('postslist')
@@ -89,8 +97,12 @@ class PostController extends Controller
           'title' => 'required|max:255',
           'description' => 'required',
           'content' => 'required',
-          'image' => 'required',
+          'imageinput' => 'required',
       ]);
+
+      $imagePath = $request->imageinput->store('blog', 'public');
+      $request['image']=$imagePath;
+
       $post = Post::find($id);
       $post->update($request->all());
       $post->categories()->sync($request->category_id);

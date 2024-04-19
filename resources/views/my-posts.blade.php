@@ -18,6 +18,9 @@
                                     {{$post['title']}}
                                 </h2>
                                 <div class="flex flex-row justify-start items-start gap-2">
+                                    @if ($post->image)
+                                        <img src='{{asset('storage/'.$post->image)}}' alt="" class="h-40">  
+                                    @endif
                                     <div>
                                         <p class="mt-4">
                                             {{$post['description']}}
@@ -26,7 +29,6 @@
                                             {{$post['content']}}
                                         </p>
                                     </div>
-                                    <img src='{{$post['image']}}' alt="">
                                 </div>
                                 <div class="flex gap-2">
                                     <a href="{{ route('modifpost', $post->id) }}" class="hover:text-black/70">Modifier</a>

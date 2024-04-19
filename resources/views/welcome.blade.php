@@ -32,16 +32,18 @@
                     <div
                         class="m-3 flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10"
                     >
-                        <div class="m-3 pt-3 sm:pt-5 w-full">
-                            <h2 class="text-xl font-semibold text-black dark:text-white">
+                        <div class=" flex flex-col gap-4 sm:pt-5 w-full">
+                            <h2 class="text-xl font-semibold text-black">
                                 {{$post['title']}}
                             </h2>
-                            <div class="flex flex-row justify-between w-full items-start gap-2">
+                            <div class="w-full flex flex-row flex-nowrap justify-between gap-6">
+                                @if ($post->image)
+                                    <img src='{{asset('storage/'.$post->image)}}' alt="" class="h-40">  
+                                @endif
+                                
                                 <p class="mt-4">
-                                    {{$post['content']}}
+                                    {{$post['description']}}
                                 </p>
-
-                                <img src='{{$post['image']}}' alt="" class="h-40">
                             </div>
                             <div>
                                 <p>
@@ -55,6 +57,9 @@
                                         @endforeach
                                     </p>
                                 @endif
+                            </div>
+                            <div>
+                                <a href="{{ route('modifpost', $post->id) }}" class="hover:text-black/70">Modifier</a>
                             </div>
                         </div>
                     </div>

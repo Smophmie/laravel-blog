@@ -33,6 +33,12 @@ class IndexController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $post = Post::find($id);
+        return view('showpost', compact('post'));
+    }
+
     public function admin(): View
     {   
         return view('postslist');

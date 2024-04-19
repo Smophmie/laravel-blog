@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'welcome'])->name('welcome');
 
+Route::get('/{id}/showpost', [IndexController::class, 'show'])->name('showpost');
+
 Route::get('/legals', [LegalsController::class, 'legals'])->name('legals');
 
 Route::get('/about-us', [AboutUsController::class, 'about_us'])->name('about-us');
