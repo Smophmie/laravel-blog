@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 
 class PostSeeder extends Seeder
 {
@@ -13,6 +15,12 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        Post::factory(10)->create();
+    
+
+        $categories = Category::All();
+
+        Post::factory(1)->create()->each(function($posts) use ($categories) {
+            $posts->categories()->attach($categories->random());
+        });
     }
 }

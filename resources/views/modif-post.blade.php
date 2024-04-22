@@ -7,7 +7,7 @@
 
     <section class="max-w-7xl mx-auto pt-5 sm:pt-5 sm:px-6 lg:px-8">
 
-        <form class="w-full max-w-lg px-8 pt-6 pb-8 mb-4" action="{{ route('updatepost', $post->id) }}" method="post">
+        <form class="w-full max-w-lg px-8 pt-6 pb-8 mb-4" action="{{ route('updatepost', $post->id) }}" method="post" enctype="multipart/form-data">
         
 
             @csrf
@@ -18,7 +18,7 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="modif-post-title">
                         Titre du post
                     </label>
-                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="modif-post-title" type="text" name="title" value="{{$post->title}}">
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="modif-post-title" type="text" name="title" value="{{$post->title}}">
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">

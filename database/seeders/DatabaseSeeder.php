@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(5)->create();
 
         User::factory()->create([
             'name' => 'Test User Admin',
@@ -28,5 +27,9 @@ class DatabaseSeeder extends Seeder
             'role' => "normal",
         ]);
 
+        $this->call([
+            CategorySeeder::class,
+            PostSeeder::class,
+        ]);
     }
 }

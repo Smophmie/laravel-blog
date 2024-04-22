@@ -69,7 +69,7 @@ class PostController extends Controller
           'imageinput' => 'required',
       ]);
       
-
+      
       $imagePath = $request->imageinput->store('blog', 'public');
       $request['image']=$imagePath;
 
@@ -85,7 +85,7 @@ class PostController extends Controller
     public function show($id)
     {
       $post = Post::find($id);
-      return view('posts.show', compact('post'));
+      return view('showpost', compact('post'));
     }
 
     /**
@@ -97,9 +97,10 @@ class PostController extends Controller
           'title' => 'required|max:255',
           'description' => 'required',
           'content' => 'required',
-          'imageinput' => 'required',
+          // 'imageinput' => 'required',
       ]);
 
+  
       $imagePath = $request->imageinput->store('blog', 'public');
       $request['image']=$imagePath;
 

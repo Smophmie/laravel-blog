@@ -57,9 +57,7 @@
                                         @endforeach
                                     </p>
                                 @endif
-                            </div>
-                            <div>
-                                <a href="{{ route('modifpost', $post->id) }}" class="hover:text-black/70">Modifier</a>
+                                <a href="{{ route('showpost', $post->id) }}" class="hover:text-black/70">Voir plus</a>
                             </div>
                         </div>
                     </div>
