@@ -15,12 +15,10 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-    
-
         $categories = Category::All();
 
-        Post::factory(1)->create()->each(function($posts) use ($categories) {
-            $posts->categories()->attach($categories->random());
+        Post::factory(10)->create()->each(function($post) use ($categories) {
+            $post->categories()->attach($categories->random());
         });
     }
 }
